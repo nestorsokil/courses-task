@@ -22,6 +22,15 @@ public class Test {
         );
         actual = Task.possibleCourses(5, 3);
         assertEquals(expected, actual);
+
+        expected = Set.of(
+                c(0), c(1), c(2), c(3), c(4),
+                c(0, 1), c(0, 2), c(0, 3), c(0, 4), c(1, 2), c(1, 3), c(1, 4), c(2, 3), c(2, 4), c(3, 4),
+                c(0, 1, 2), c(0, 1, 3), c(0, 2, 3), c(0, 1, 4), c(0, 2, 4), c(0, 3, 4), c(1, 2, 3), c(1, 2, 4), c(1, 3, 4), c(2, 3, 4),
+                c(0, 1, 2, 3), c(0, 1, 2, 4), c(0, 1, 3, 4), c(0, 2, 3, 4), c(1, 2, 3, 4)
+        );
+        actual = Task.possibleCourses(5, 4);
+        assertEquals(expected, actual);
     }
 
     @org.junit.Test

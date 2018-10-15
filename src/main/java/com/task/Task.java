@@ -64,9 +64,8 @@ public final class Task {
             result.add(CourseSelection.of(combination));
             return;
         }
-
-        for (int i = index; i <= labels.length - shift; i++) {
-            int combinationIndex = combinationSize - shift;
+        for (var i = index; i <= labels.length - shift; i++) {
+            var combinationIndex = combinationSize - shift;
             combination[combinationIndex] = labels[i];
             findCombinations(i + 1,shift - 1, combinationSize, labels, combination, result);
 
