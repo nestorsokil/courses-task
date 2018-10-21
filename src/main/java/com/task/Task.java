@@ -26,13 +26,13 @@ public final class Task {
 
     // Task 3
     /**
-     * Same as {@link Task#possibleCourses(int, int)}, but only returns first-year selections due to provided prerequisites.
+     * Same as {@link Task#possibleCourses(int, int)}, but only returns first-semester selections due to provided prerequisites.
      * @param total Total number of courses.
      * @param possible Size of combinations.
      * @param prerequisites List of prerequisite pairs.
      * @return A set containing all possible courseSelections.
      */
-    public static Set<CourseSelection> possibleCoursesFirstYear(int total, int possible, List<List<Integer>> prerequisites) {
+    public static Set<CourseSelection> possibleCoursesFirstSemester(int total, int possible, List<List<Integer>> prerequisites) {
         if (prerequisites.isEmpty()) {
             return possibleCourses(total, possible);
         }
@@ -64,8 +64,8 @@ public final class Task {
             result.add(CourseSelection.of(combination));
             return;
         }
+        var combinationIndex = combinationSize - shift;
         for (var i = index; i <= labels.length - shift; i++) {
-            var combinationIndex = combinationSize - shift;
             combination[combinationIndex] = labels[i];
             findCombinations(i + 1,shift - 1, combinationSize, labels, combination, result);
 
@@ -89,7 +89,7 @@ public final class Task {
         }
         final Map<Integer, List<Integer>> outgoing = new HashMap<>();
         final Set<Integer> uniqueCourses = new HashSet<>();
-        for (List<Integer> pair : prerequisites) {
+        for (var pair : prerequisites) {
             if (pair.size() != 2) {
                 throw new IllegalArgumentException("Should be a list of pairs");
             }
@@ -97,7 +97,7 @@ public final class Task {
             var node = pair.get(0);
             var prerequisite = pair.get(1);
             if (!outgoing.containsKey(node)) {
-                List<Integer> neighbors = new ArrayList<>();
+                var neighbors = new ArrayList<Integer>();
                 neighbors.add(prerequisite);
                 outgoing.put(node, neighbors);
             } else {
